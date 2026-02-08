@@ -101,7 +101,7 @@ button {
         opacity: 0;
     }
 }
-    .firework {
+.firework {
     position: fixed;
     width: 6px;
     height: 6px;
@@ -158,7 +158,7 @@ function createHeart() {
 }
 setInterval(createHeart, 300);
 
-/* 🎆 FIREWORK EFFECT */
+
 function fireworkBurst() {
     const x = Math.random() * window.innerWidth;
     const y = Math.random() * window.innerHeight / 2;
@@ -191,7 +191,7 @@ function fireworkBurst() {
     }
 }
 
-/* 🎇 Random fireworks in background */
+
 setInterval(fireworkBurst, 2000);
 
 /* 🎉 Big celebration on load */
@@ -207,4 +207,5 @@ window.onload = () => {
 
 </body>
 </html>
+
 
