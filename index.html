@@ -17,13 +17,18 @@ body {
     overflow: hidden;
     font-family: 'Segoe UI', sans-serif;
     color: white;
+    animation: fadeIn 1.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0 }
+    to { opacity: 1 }
 }
 
 /* 🎥 Video Background */
 video {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -52,10 +57,8 @@ video {
 }
 
 h1 {
-    <img src="her.png" class="her-photo">
-
     font-size: clamp(2rem, 5vw, 3.5rem);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-shadow: 0 0 20px pink, 0 0 40px hotpink;
     animation: glow 2s infinite alternate;
 }
@@ -67,9 +70,9 @@ h1 {
 
 /* ⌨ Typing effect */
 .typing {
+    white-space: nowrap;
     overflow: hidden;
     border-right: 3px solid pink;
-    white-space: nowrap;
     animation: typing 4s steps(30, end) forwards, blink 0.8s infinite;
 }
 
@@ -82,9 +85,26 @@ h1 {
     50% { border-color: transparent }
 }
 
+/* 🖼️ HER PHOTO */
+.her-photo {
+    width: 200px;
+    height: 200px;
+    margin: 20px 0;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 30px hotpink;
+    animation: photoFloat 4s ease-in-out infinite;
+}
+
+@keyframes photoFloat {
+    0%   { transform: translate3d(0,0,0); }
+    50%  { transform: translate3d(0,-12px,0); }
+    100% { transform: translate3d(0,0,0); }
+}
+
 /* 🎵 Button */
 button {
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 12px 28px;
     font-size: 18px;
     border: none;
@@ -104,17 +124,17 @@ button:hover {
 .heart {
     position: fixed;
     font-size: 20px;
-    animation: float 6s linear infinite;
     z-index: 5;
+    animation: float 6s linear infinite;
 }
 
 @keyframes float {
     from {
-        transform: translateY(100vh) scale(1);
+        transform: translate3d(0, 100vh, 0) scale(1);
         opacity: 1;
     }
     to {
-        transform: translateY(-10vh) scale(1.5);
+        transform: translate3d(0, -10vh, 0) scale(1.3);
         opacity: 0;
     }
 }
@@ -128,28 +148,12 @@ button:hover {
     pointer-events: none;
     z-index: 999;
 }
-    .her-photo {
-    width: 220px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-top: 20px;
-    box-shadow: 0 0 30px hotpink;
-    animation: floatPhoto 4s ease-in-out infinite;
-}
-
-@keyframes floatPhoto {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
-}
-
 </style>
 </head>
 
 <body>
 
-<video autoplay muted loop playsinline>
+<video autoplay muted loop playsinline preload="metadata">
     <source src="background.mp4" type="video/mp4">
 </video>
 
@@ -157,6 +161,10 @@ button:hover {
 
 <div class="container">
     <h1 class="typing">🎂 Happy Birthday Susmitha ❤️</h1>
+
+    <!-- 💖 HER IMAGE -->
+    <img src="her.png" alt="Her Photo" class="her-photo">
+
     <button onclick="playMusic()">▶ Play Music 🎵</button>
 </div>
 
@@ -165,10 +173,11 @@ button:hover {
 </audio>
 
 <script>
+const isMobile = window.innerWidth < 768;
+
 /* 🎵 Music + Fireworks */
 function playMusic() {
-    const music = document.getElementById("bgMusic");
-    music.play();
+    document.getElementById("bgMusic").play();
     fireworkBurst();
 }
 
@@ -182,14 +191,16 @@ function createHeart() {
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 6000);
 }
-setInterval(createHeart, 400);
+setInterval(createHeart, isMobile ? 700 : 400);
 
-/* 🎆 Firework effect */
+/* 🎆 Fireworks */
 function fireworkBurst() {
     const x = Math.random() * window.innerWidth;
     const y = Math.random() * window.innerHeight * 0.5;
 
-    for (let i = 0; i < 50; i++) {
+    const sparks = isMobile ? 30 : 50;
+
+    for (let i = 0; i < sparks; i++) {
         const spark = document.createElement("div");
         spark.className = "spark";
         spark.style.left = x + "px";
@@ -202,22 +213,15 @@ function fireworkBurst() {
 
         spark.animate([
             { transform: "translate(0,0)", opacity: 1 },
-            {
-                transform: `translate(${Math.cos(angle)*distance}px, ${Math.sin(angle)*distance}px)`,
-                opacity: 0
-            }
-        ], {
-            duration: 1500,
-            easing: "ease-out"
-        });
+            { transform: `translate(${Math.cos(angle)*distance}px, ${Math.sin(angle)*distance}px)`, opacity: 0 }
+        ], { duration: 1500, easing: "ease-out" });
 
         document.body.appendChild(spark);
         setTimeout(() => spark.remove(), 1500);
     }
 }
 
-/* 🎉 Auto fireworks */
-setInterval(fireworkBurst, 2500);
+setInterval(fireworkBurst, isMobile ? 4000 : 2500);
 
 window.onload = () => {
     setTimeout(() => {
@@ -229,5 +233,3 @@ window.onload = () => {
 
 </body>
 </html>
-
-
