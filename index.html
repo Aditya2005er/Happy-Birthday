@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday ❤️</title>
 
 <style>
@@ -18,40 +19,41 @@ body {
     color: white;
 }
 
-/* Video Background */
+/* 🎥 Video Background */
 video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-    z-index: -2;
-}
-
-/* Dark overlay for readability */
-.overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* 🌑 Dark overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
     z-index: -1;
 }
 
-/* Content */
+/* 🎂 Content */
 .container {
+    position: relative;
+    z-index: 10;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 20px;
 }
 
 h1 {
-    font-size: 3.5em;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 20px;
     text-shadow: 0 0 20px pink, 0 0 40px hotpink;
     animation: glow 2s infinite alternate;
 }
@@ -61,18 +63,24 @@ h1 {
     to { text-shadow: 0 0 30px hotpink, 0 0 60px deeppink; }
 }
 
+/* ⌨ Typing effect */
 .typing {
-    white-space: nowrap;
     overflow: hidden;
     border-right: 3px solid pink;
-    width: 0;
-    animation: typing 4s steps(30, end) forwards;
+    white-space: nowrap;
+    animation: typing 4s steps(30, end) forwards, blink 0.8s infinite;
 }
 
 @keyframes typing {
-    to { width: 100%; }
+    from { max-width: 0 }
+    to { max-width: 100% }
 }
 
+@keyframes blink {
+    50% { border-color: transparent }
+}
+
+/* 🎵 Button */
 button {
     margin-top: 30px;
     padding: 12px 28px;
@@ -83,12 +91,19 @@ button {
     background: linear-gradient(45deg, hotpink, deeppink);
     color: white;
     box-shadow: 0 0 15px hotpink;
+    transition: transform 0.3s;
 }
 
+button:hover {
+    transform: scale(1.1);
+}
+
+/* ❤️ Hearts */
 .heart {
-    position: absolute;
+    position: fixed;
     font-size: 20px;
     animation: float 6s linear infinite;
+    z-index: 5;
 }
 
 @keyframes float {
@@ -101,15 +116,8 @@ button {
         opacity: 0;
     }
 }
-.firework {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999;
-}
 
+/* 🎆 Firework sparks */
 .spark {
     position: fixed;
     width: 4px;
@@ -118,7 +126,6 @@ button {
     pointer-events: none;
     z-index: 999;
 }
-
 </style>
 </head>
 
@@ -140,8 +147,10 @@ button {
 </audio>
 
 <script>
+/* 🎵 Music + Fireworks */
 function playMusic() {
-    document.getElementById("bgMusic").play();
+    const music = document.getElementById("bgMusic");
+    music.play();
     fireworkBurst();
 }
 
@@ -155,14 +164,14 @@ function createHeart() {
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 6000);
 }
-setInterval(createHeart, 300);
+setInterval(createHeart, 400);
 
-
+/* 🎆 Firework effect */
 function fireworkBurst() {
     const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight / 2;
+    const y = Math.random() * window.innerHeight * 0.5;
 
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 50; i++) {
         const spark = document.createElement("div");
         spark.className = "spark";
         spark.style.left = x + "px";
@@ -176,8 +185,7 @@ function fireworkBurst() {
         spark.animate([
             { transform: "translate(0,0)", opacity: 1 },
             {
-                transform: `translate(${Math.cos(angle)*distance}px,
-                ${Math.sin(angle)*distance}px)`,
+                transform: `translate(${Math.cos(angle)*distance}px, ${Math.sin(angle)*distance}px)`,
                 opacity: 0
             }
         ], {
@@ -190,22 +198,16 @@ function fireworkBurst() {
     }
 }
 
+/* 🎉 Auto fireworks */
+setInterval(fireworkBurst, 2500);
 
-setInterval(fireworkBurst, 2000);
-
-/* 🎉 Big celebration on load */
 window.onload = () => {
     setTimeout(() => {
-        fireworkBurst();
         fireworkBurst();
         fireworkBurst();
     }, 1000);
 };
 </script>
 
-
 </body>
 </html>
-
-
-
