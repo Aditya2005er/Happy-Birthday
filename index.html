@@ -14,7 +14,7 @@
 
 body {
     height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
     font-family: 'Segoe UI', sans-serif;
     color: white;
     animation: fadeIn 1.2s ease-out;
@@ -47,18 +47,17 @@ video {
 .container {
     position: relative;
     z-index: 10;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
 h1 {
     font-size: clamp(2rem, 5vw, 3.5rem);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-shadow: 0 0 20px pink, 0 0 40px hotpink;
     animation: glow 2s infinite alternate;
 }
@@ -85,26 +84,9 @@ h1 {
     50% { border-color: transparent }
 }
 
-/* 🖼️ HER PHOTO */
-.her-photo {
-    width: 200px;
-    height: 200px;
-    margin: 20px 0;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 0 30px hotpink;
-    animation: photoFloat 4s ease-in-out infinite;
-}
-
-@keyframes photoFloat {
-    0%   { transform: translate3d(0,0,0); }
-    50%  { transform: translate3d(0,-12px,0); }
-    100% { transform: translate3d(0,0,0); }
-}
-
 /* 🎵 Button */
 button {
-    margin-top: 20px;
+    margin-top: 30px;
     padding: 12px 28px;
     font-size: 18px;
     border: none;
@@ -120,6 +102,52 @@ button:hover {
     transform: scale(1.1);
 }
 
+/* 📸 Polaroid Gallery */
+.polaroid-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    max-width: 1000px;
+}
+
+.polaroid {
+    background: white;
+    padding: 15px 15px 40px 15px;
+    width: 200px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.polaroid:nth-child(odd) {
+    transform: rotate(-6deg);
+}
+
+.polaroid:nth-child(even) {
+    transform: rotate(6deg);
+}
+
+.polaroid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.polaroid p {
+    margin-top: 10px;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 14px;
+    color: black;
+    text-align: center;
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) scale(1.08);
+    box-shadow: 0 15px 35px rgba(255,105,180,0.8);
+    z-index: 10;
+}
+
 /* ❤️ Hearts */
 .heart {
     position: fixed;
@@ -130,16 +158,16 @@ button:hover {
 
 @keyframes float {
     from {
-        transform: translate3d(0, 100vh, 0) scale(1);
+        transform: translate3d(0, 100vh, 0);
         opacity: 1;
     }
     to {
-        transform: translate3d(0, -10vh, 0) scale(1.3);
+        transform: translate3d(0, -10vh, 0);
         opacity: 0;
     }
 }
 
-/* 🎆 Firework sparks */
+/* 🎆 Fireworks */
 .spark {
     position: fixed;
     width: 4px;
@@ -162,8 +190,35 @@ button:hover {
 <div class="container">
     <h1 class="typing">🎂 Happy Birthday Susmitha ❤️</h1>
 
-    <!-- 💖 HER IMAGE -->
-    <img src="her.png" alt="Her Photo" class="her-photo">
+    <!-- 💖 POLAROID GALLERY -->
+    <div class="polaroid-gallery">
+
+        <div class="polaroid">
+            <img src="photo1.jpg" alt="Memory 1">
+            <p> 💕</p>
+        </div>
+
+        <div class="polaroid">
+            <img src="photo2.jpg" alt="Memory 2">
+            <p>That cute smile 😍</p>
+        </div>
+
+        <div class="polaroid">
+            <img src="photo3.jpg" alt="Memory 3">
+            <p> ❤️</p>
+        </div>
+
+        <div class="polaroid">
+            <img src="photo4.jpg" alt="Memory 4">
+            <p>Pure happiness ✨</p>
+        </div>
+
+        <div class="polaroid">
+            <img src="photo5.jpg" alt="Memory 5">
+            <p>🌸</p>
+        </div>
+
+    </div>
 
     <button onclick="playMusic()">▶ Play Music 🎵</button>
 </div>
@@ -175,13 +230,12 @@ button:hover {
 <script>
 const isMobile = window.innerWidth < 768;
 
-/* 🎵 Music + Fireworks */
 function playMusic() {
     document.getElementById("bgMusic").play();
     fireworkBurst();
 }
 
-/* ❤️ Floating hearts */
+/* ❤️ Hearts */
 function createHeart() {
     const heart = document.createElement("div");
     heart.className = "heart";
@@ -197,7 +251,6 @@ setInterval(createHeart, isMobile ? 700 : 400);
 function fireworkBurst() {
     const x = Math.random() * window.innerWidth;
     const y = Math.random() * window.innerHeight * 0.5;
-
     const sparks = isMobile ? 30 : 50;
 
     for (let i = 0; i < sparks; i++) {
