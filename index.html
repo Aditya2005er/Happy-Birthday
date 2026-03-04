@@ -6,283 +6,327 @@
 <title>Happy Birthday ❤️</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-body {
-    height: 100vh;
-    overflow-x: hidden;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    animation: fadeIn 1.2s ease-out;
+body{
+height:100vh;
+overflow:hidden;
+font-family:'Segoe UI',sans-serif;
+color:white;
+animation:fadeIn 1.2s ease-out;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0 }
-    to { opacity: 1 }
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
 }
 
-/* 🎥 Video Background */
-video {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2;
+/* VIDEO BACKGROUND */
+
+video{
+position:fixed;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
 }
 
-/* 🌑 Dark overlay */
-.overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    z-index: -1;
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.55);
+z-index:-1;
 }
 
-/* 🎂 Content */
-.container {
-    position: relative;
-    z-index: 10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 40px 20px;
+/* MAIN CONTAINER */
+
+.container{
+position:relative;
+z-index:10;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+padding:40px 20px;
 }
 
-h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    margin-bottom: 20px;
-    text-shadow: 0 0 20px pink, 0 0 40px hotpink;
-    animation: glow 2s infinite alternate;
+h1{
+font-size:clamp(2rem,5vw,3.5rem);
+margin-bottom:20px;
+text-shadow:0 0 20px pink,0 0 40px hotpink;
 }
 
-@keyframes glow {
-    from { text-shadow: 0 0 10px pink; }
-    to { text-shadow: 0 0 30px hotpink, 0 0 60px deeppink; }
+/* LETTER */
+
+.letter{
+margin-top:30px;
+max-width:600px;
+line-height:1.8;
+font-size:18px;
+background:rgba(255,255,255,0.08);
+padding:25px;
+border-radius:15px;
+backdrop-filter:blur(10px);
 }
 
-/* ⌨ Typing effect */
-.typing {
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 3px solid pink;
-    animation: typing 4s steps(30, end) forwards, blink 0.8s infinite;
+/* BUTTON */
+
+button{
+margin-top:30px;
+padding:12px 28px;
+font-size:18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+background:linear-gradient(45deg,hotpink,deeppink);
+color:white;
+box-shadow:0 0 15px hotpink;
+transition:transform .3s;
 }
 
-@keyframes typing {
-    from { max-width: 0 }
-    to { max-width: 100% }
+button:hover{
+transform:scale(1.1);
 }
 
-@keyframes blink {
-    50% { border-color: transparent }
+/* POLAROID GALLERY */
+
+.polaroid-gallery{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+margin-top:40px;
+max-width:1000px;
 }
 
-/* 🎵 Button */
-button {
-    margin-top: 30px;
-    padding: 12px 28px;
-    font-size: 18px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    background: linear-gradient(45deg, hotpink, deeppink);
-    color: white;
-    box-shadow: 0 0 15px hotpink;
-    transition: transform 0.3s;
+.polaroid{
+background:white;
+padding:15px 15px 40px;
+width:200px;
+box-shadow:0 10px 25px rgba(0,0,0,0.6);
+transition:transform .4s ease, box-shadow .4s ease;
+cursor:pointer;
 }
 
-button:hover {
-    transform: scale(1.1);
+.polaroid:nth-child(odd){
+transform:rotate(-6deg);
 }
 
-/* 📸 Polaroid Gallery */
-.polaroid-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 40px;
-    max-width: 1000px;
+.polaroid:nth-child(even){
+transform:rotate(6deg);
 }
 
-.polaroid {
-    background: white;
-    padding: 15px 15px 40px 15px;
-    width: 200px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+.polaroid img{
+width:100%;
+height:200px;
+object-fit:cover;
 }
 
-.polaroid:nth-child(odd) {
-    transform: rotate(-6deg);
+.polaroid p{
+margin-top:10px;
+font-family:'Comic Sans MS',cursive;
+font-size:14px;
+color:black;
+text-align:center;
 }
 
-.polaroid:nth-child(even) {
-    transform: rotate(6deg);
+.polaroid:hover{
+transform:rotate(0deg) scale(1.08);
+box-shadow:0 15px 35px rgba(255,105,180,0.8);
+z-index:10;
 }
 
-.polaroid img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+/* FLOATING HEARTS */
+
+.heart{
+position:fixed;
+font-size:20px;
+z-index:5;
+animation:float 6s linear infinite;
 }
 
-.polaroid p {
-    margin-top: 10px;
-    font-family: 'Comic Sans MS', cursive;
-    font-size: 14px;
-    color: black;
-    text-align: center;
+@keyframes float{
+from{
+transform:translateY(100vh);
+opacity:1;
+}
+to{
+transform:translateY(-10vh);
+opacity:0;
+}
 }
 
-.polaroid:hover {
-    transform: rotate(0deg) scale(1.08);
-    box-shadow: 0 15px 35px rgba(255,105,180,0.8);
-    z-index: 10;
+/* FIREWORK SPARK */
+
+.spark{
+position:fixed;
+width:4px;
+height:4px;
+border-radius:50%;
+pointer-events:none;
+z-index:999;
 }
 
-/* ❤️ Hearts */
-.heart {
-    position: fixed;
-    font-size: 20px;
-    z-index: 5;
-    animation: float 6s linear infinite;
-}
-
-@keyframes float {
-    from {
-        transform: translate3d(0, 100vh, 0);
-        opacity: 1;
-    }
-    to {
-        transform: translate3d(0, -10vh, 0);
-        opacity: 0;
-    }
-}
-
-/* 🎆 Fireworks */
-.spark {
-    position: fixed;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999;
-}
 </style>
 </head>
 
 <body>
 
-<video autoplay muted loop playsinline preload="metadata">
-    <source src="background.mp4" type="video/mp4">
+<video autoplay muted loop playsinline>
+<source src="background.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
 
 <div class="container">
-    <h1 class="typing">🎂Happy Birthday Susmitha❤️</h1>
 
-    <!-- 💖 POLAROID GALLERY -->
-    <div class="polaroid-gallery">
+<h1 id="title"></h1>
 
-        <div class="polaroid">
-            <img src="Photo2.jpeg" alt="Memory 1">
-            <p> 💕</p>
-        </div>
+<!-- POLAROID GALLERY -->
 
-        <div class="polaroid">
-            <img src="Photo1.jpeg" alt="Memory 2">
-            <p>That cute smile 💗</p>
-        </div>
+<div class="polaroid-gallery">
 
-        <div class="polaroid">
-            <img src="Photo3.jpeg" alt="Memory 3">
-            <p> ❤️</p>
-        </div>
+<div class="polaroid" onclick="fireworkBurst()">
+<img src="Photo2.jpeg">
+<p>💕</p>
+</div>
 
-        <div class="polaroid">
-            <img src="Photo4.jpeg" alt="Memory 4">
-            <p> ✨</p>
-        </div>
+<div class="polaroid" onclick="fireworkBurst()">
+<img src="Photo1.jpeg">
+<p>That cute smile 💗</p>
+</div>
 
-    </div>
+<div class="polaroid" onclick="fireworkBurst()">
+<img src="Photo3.jpeg">
+<p>❤️</p>
+</div>
 
-    <button onclick="playMusic()">▶ Play Music 🎵</button>
+<div class="polaroid" onclick="fireworkBurst()">
+<img src="Photo4.jpeg">
+<p>✨</p>
+</div>
+
+</div>
+
+<!-- LETTER -->
+
+<div class="letter">
+<p>
+Today is special because the most wonderful person in my world was born.
+</p>
+
+<p>
+Your smile makes everything brighter and your presence makes life calmer.
+</p>
+
+<p>
+I hope this year brings you happiness, laughter and everything you dream about.
+</p>
+
+<p>
+Never forget something —
+<b>Your smile is my favorite thing in the world.</b>
+</p>
+
+<p>❤️</p>
+</div>
+
+<button onclick="playMusic()">▶ Play Music 🎵</button>
+
 </div>
 
 <audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">
+<source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+
 const isMobile = window.innerWidth < 768;
 
-function playMusic() {
-    document.getElementById("bgMusic").play();
-    fireworkBurst();
+/* TITLE TYPING */
+
+const text="🎂 Happy Birthday Susmitha ❤️";
+let i=0;
+
+function typeWriter(){
+if(i<text.length){
+document.getElementById("title").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typeWriter,80);
+}
 }
 
-/* ❤️ Hearts */
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}
-setInterval(createHeart, isMobile ? 700 : 400);
+typeWriter();
 
-/* 🎆 Fireworks */
-function fireworkBurst() {
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight * 0.5;
-    const sparks = isMobile ? 30 : 50;
+/* MUSIC */
 
-    for (let i = 0; i < sparks; i++) {
-        const spark = document.createElement("div");
-        spark.className = "spark";
-        spark.style.left = x + "px";
-        spark.style.top = y + "px";
-        spark.style.backgroundColor =
-            `hsl(${Math.random() * 360}, 100%, 60%)`;
-
-        const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * 250;
-
-        spark.animate([
-            { transform: "translate(0,0)", opacity: 1 },
-            { transform: `translate(${Math.cos(angle)*distance}px, ${Math.sin(angle)*distance}px)`, opacity: 0 }
-        ], { duration: 1500, easing: "ease-out" });
-
-        document.body.appendChild(spark);
-        setTimeout(() => spark.remove(), 1500);
-    }
+function playMusic(){
+document.getElementById("bgMusic").play();
+fireworkBurst();
 }
 
-setInterval(fireworkBurst, isMobile ? 4000 : 2500);
+/* HEARTS */
 
-window.onload = () => {
-    setTimeout(() => {
-        fireworkBurst();
-        fireworkBurst();
-    }, 1000);
-};
+function createHeart(){
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+}
+
+setInterval(createHeart,isMobile?700:400);
+
+/* FIREWORKS */
+
+function fireworkBurst(){
+
+const x=Math.random()*window.innerWidth;
+const y=Math.random()*window.innerHeight*0.5;
+const sparks=isMobile?25:45;
+
+for(let i=0;i<sparks;i++){
+
+const spark=document.createElement("div");
+spark.className="spark";
+spark.style.left=x+"px";
+spark.style.top=y+"px";
+spark.style.backgroundColor=`hsl(${Math.random()*360},100%,60%)`;
+
+const angle=Math.random()*Math.PI*2;
+const distance=Math.random()*250;
+
+spark.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:`translate(${Math.cos(angle)*distance}px,${Math.sin(angle)*distance}px)`,opacity:0}
+],{duration:1400,easing:"ease-out"});
+
+document.body.appendChild(spark);
+setTimeout(()=>spark.remove(),1400);
+
+}
+
+}
+
+setInterval(fireworkBurst,isMobile?4500:3000);
+
+window.onload=()=>{
+setTimeout(()=>{
+fireworkBurst();
+fireworkBurst();
+},1200);
+}
+
 </script>
 
 </body>
 </html>
-
-
-
-
-
